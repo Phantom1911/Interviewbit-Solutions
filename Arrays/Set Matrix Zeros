@@ -1,0 +1,46 @@
+/*The solution is O(n^2). Looping through each element of a two dimensional matrix is n squared, so we can't then go ahead and make all the elements of its row and 
+col as 0, as this would make solution n cube. Also if you make an element that was 1 initially to a 0 during this process, you'll get a 
+wrong answer.
+So we take the sum of each row -->> store it in rowSum array.
+sum of each col -->> store it in a colSum array.
+then we think that the sum of each row should be equal to the number of columns and the sum of each col should be equal to number of rows */
+
+
+
+
+
+public class Solution {
+    public void setZeroes(ArrayList<ArrayList<Integer>> A) {
+        ArrayList<Integer> rowSum = new ArrayList<Integer>();
+        ArrayList<Integer> colSum = new ArrayList<Integer>();
+        for(int i=0;i<A.size();i++){//looping through each row
+            int currSum = 0;
+            for(int j=0;j<A.get(i).size();j++){
+                currSum += A.get(i).get(j);
+            }
+            rowSum.add(currSum);
+        }
+        for(int i=0;i<A.get(0).size();i++){//looping through each column
+            int currSum = 0;
+            for(int j=0;j<A.size();j++){
+                currSum += A.get(j).get(i);
+            }
+            colSum.add(currSum);
+        }
+        for(int i=0;i<rowSum.size();i++){
+            if(rowSum.get(i)<A.get(i).size()){
+                for(int j=0;j<A.get(i).size();j++){
+                A.get(i).set(j,0);
+                }
+            }
+        }
+        for(int i=0;i<colSum.size();i++){
+            if(colSum.get(i)<A.size()){
+                for(int j=0;j<A.size();j++){
+                A.get(j).set(i,0);
+                }
+            }
+        }
+    }
+    
+}
